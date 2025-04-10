@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎥 Browse Movies</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <center>
+  <header>
+    <h2>🎞️ Movies in <span id="cityName"></span></h2>
+  </header>
+</center>
+  <div class="searchbar">
+     <input placeholder="Browse Movies">
+  </div>
+  
+  <section class="movie-section">
+    <div class="movie-card">
+      <img src="https://source.unsplash.com/200x200/?perfume?1" alt="Movie 1" />
+      <h3>Leo</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=2" alt="Movie 2" />
+      <h3>Jailer</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=3" alt="Movie 3" />
+      <h3>Captain Miller</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=4" alt="Movie 4" />
+      <h3>Viduthalai</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=5" alt="Movie 5" />
+      <h3>Maaveeran</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=6" alt="Movie 6" />
+      <h3>Good Night</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=7" alt="Movie 7" />
+      <h3>Don</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=8" alt="Movie 8" />
+      <h3>Beast</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=9" alt="Movie 9" />
+      <h3>Master</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=10" alt="Movie 10" />
+      <h3>Doctor</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=11" alt="Movie 11" />
+      <h3>Thunivu</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=12" alt="Movie 12" />
+      <h3>Vikram</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=13" alt="Movie 13" />
+      <h3>Sita Ramam</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=14" alt="Movie 14" />
+      <h3>Ponniyin Selvan</h3>
+    </div>
+    <div class="movie-card">
+      <img src="https://picsum.photos/200/300?random=15" alt="Movie 15" />
+      <h3>Raangi</h3>
+    </div>
+  </section>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const city = params.get("city");
+    document.getElementById("cityName").innerText = city;
+  </script>
+  
+</body>
+</html>
