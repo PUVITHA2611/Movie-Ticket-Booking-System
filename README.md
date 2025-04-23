@@ -1,27 +1,152 @@
-# Frontend
+# 🎬 Movie Ticket Booking System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+A full-stack web-based application for browsing movies, selecting seats, and booking tickets. Built using **Angular 16**, **Node.js (TypeScript)**, **Express**, and **MySQL**.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 📌 Objective
 
-## Code scaffolding
+To create a seamless movie booking experience where users can:
+- Browse available movies
+- Select seats
+- Book tickets
+- View booking confirmations
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🚀 Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 👤 User Roles
+- No authentication required
+- Browse movies & details
+- Select seats
+- Book tickets
+- View booking confirmation
 
-## Running unit tests
+### 🎥 Movie & Showtime Management
+- View movie listings and details
+- Includes showtime, genre, duration, rating, and poster
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 🎟️ Ticket Booking
+- Choose available seats
+- Confirm bookings
+- View booking details
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 🖥️ Frontend (Angular 16 + Angular Material)
 
-## Further help
+### Components
+| Component                  | Description                         |
+|---------------------------|-------------------------------------|
+| `MovieListComponent`      | Displays all movies                 |
+| `MovieDetailsComponent`   | Shows movie details and showtimes   |
+| `SeatSelectionComponent`  | Seat selection interface            |
+| `BookingConfirmationComponent` | Shows booking confirmation    |
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Routes
+| Path                   | Component                  | Purpose                    |
+|------------------------|----------------------------|----------------------------|
+| `/movies`              | MovieListComponent         | View all movies            |
+| `/movies/:id`          | MovieDetailsComponent      | Movie details & showtimes  |
+| `/movies/:id/book`     | SeatSelectionComponent     | Select seats for booking   |
+| `/booking/:id`         | BookingConfirmationComponent | View booking details     |
+
+---
+
+## 🔧 Backend (Node.js + Express + TypeScript)
+
+### ✅ REST API Endpoints
+
+#### 🎬 Movies
+| Method | Endpoint           | Description            |
+|--------|--------------------|------------------------|
+| GET    | `/api/movies`      | Fetch all movies       |
+| GET    | `/api/movies/:id`  | Fetch movie by ID      |
+
+#### 🎟️ Bookings
+| Method | Endpoint             | Description              |
+|--------|----------------------|--------------------------|
+| POST   | `/api/bookings`      | Create a new booking     |
+| GET    | `/api/bookings/:id`  | Get booking by ID        |
+| GET    | `/api/bookings`      | Get all bookings         |
+
+#### 💺 Seats
+| Method | Endpoint           | Description                   |
+|--------|--------------------|-------------------------------|
+| GET    | `/api/seats/:id`   | Get seat availability by movie ID |
+
+✅ **Total API Endpoints: 6**
+
+---
+
+## 🗃️ Database Schema (MySQL)
+
+### 🎬 Movies Table
+| Field      | Type         | Constraints                          |
+|------------|--------------|--------------------------------------|
+| id         | INT          | PRIMARY KEY, AUTO_INCREMENT          |
+| title      | VARCHAR(255) | NOT NULL                             |
+| genre      | VARCHAR(100) | NOT NULL                             |
+| duration   | INT          | NOT NULL                             |
+| rating     | DECIMAL(3,1) | NOT NULL                             |
+| poster     | VARCHAR(255) | NOT NULL                             |
+| showtime   | DATETIME     | NOT NULL                             |
+| created_at | DATETIME     | DEFAULT CURRENT_TIMESTAMP            |
+
+---
+
+### 🎟️ Bookings Table
+| Field          | Type          | Constraints                       |
+|----------------|---------------|-----------------------------------|
+| id             | INT           | PRIMARY KEY, AUTO_INCREMENT       |
+| movie_id       | INT           | FOREIGN KEY (movies.id)           |
+| selected_seats | JSON          | NOT NULL                          |
+| total_price    | DECIMAL(10,2) | NOT NULL                          |
+| booking_time   | DATETIME      | NOT NULL                          |
+| showtime       | DATETIME      |                                   |
+
+---
+
+### 💺 Seats Table
+| Field       | Type                       | Constraints                       |
+|-------------|----------------------------|-----------------------------------|
+| id          | INT                        | PRIMARY KEY, AUTO_INCREMENT       |
+| movie_id    | INT                        | FOREIGN KEY (movies.id)           |
+| seat_number | VARCHAR(10)                | NOT NULL                          |
+| is_booked   | TINYINT(1)                 | DEFAULT 0                         |
+| price       | DECIMAL(10,2)              | NOT NULL                          |
+| booked_at   | TIMESTAMP                  | NULL                              |
+| status      | ENUM('available','booked') | DEFAULT 'available'               |
+
+---
+
+## ⚙️ Validation Rules
+
+- At least one seat must be selected.
+- Total price must be greater than 0.
+- Appropriate HTTP status codes and meaningful error messages.
+- Real-time seat selection status.
+- Booking success notifications.
+
+---
+
+## 🧪 Sample API Request & Response
+
+### POST `/api/bookings`
+```json
+Request:
+{
+  "movie_id": 1,
+  "selected_seats": ["A1", "A2"],
+  "total_price": 500.00
+}
+
+Response:
+{
+  "id": 10,
+  "movie_id": 1,
+  "selected_seats": ["A1", "A2"],
+  "total_price": 500.00,
+  "booking_time": "2025-04-21T14:00:00"
+}
